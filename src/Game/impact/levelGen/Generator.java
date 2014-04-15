@@ -10,6 +10,7 @@ import Game.impact.GameActivity;
 public class Generator {
 	private static int WIDTH = 480;
 	private static int TILE_SIZE = 40;
+	private String[] entityType = new String[10];
 	public static String path;
     Random gen;
 	
@@ -37,8 +38,9 @@ public class Generator {
 			String line = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 	        line += "<level width=\"480\" height=\"" + height + "\">\n";
 	        out.write(line.getBytes());
-	        int tiles = height/80;
-	        for(int i = 5; i <= tiles; ++i)
+	        
+	        int tiles = height/TILE_SIZE;
+	        for(int i = 10; i <= tiles; ++i)
 	        {
 	        	int n = gen.nextInt(3);
 	        	if(n == 0)
