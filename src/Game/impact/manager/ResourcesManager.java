@@ -156,7 +156,8 @@ public class ResourcesManager
 	
 	public void unloadGameTextures()
 	{
-		// TODO (Since we did not create any textures for game scene yet)
+		gameTextureAtlas.unload();
+		levelGen.genlvl(activity, 1, 1024);
 	}
 	
 	public void loadSplashScreen()

@@ -9,16 +9,31 @@ import Game.impact.GameActivity;
 
 public class Generator {
 	private static int WIDTH = 480;
-	private static int TILE_SIZE = 80;
+	private static int TILE_SIZE = 40;
 	public static String path;
+    Random gen;
 	
+    long x = 20+System.currentTimeMillis(), y = 50+System.currentTimeMillis(), z = 35+System.currentTimeMillis(), w = 18 + System.currentTimeMillis();
+    long xor128() 
+    {
+        long t;
+     
+        t = x ^ (x << 11);
+        x = y; y = z; z = w;
+        return w = w ^ (w >> 19) ^ t ^ (t >> 8);
+    }
+    
+    public Generator()
+    {
+    	gen = new Random(xor128());
+    }
+    
 	public void genlvl(GameActivity activity, int level, int height)
 	{
 		try
 		{
 			FileOutputStream out = activity.openFileOutput("" + level + ".lvl",  Context.MODE_PRIVATE);
 			
-	        Random gen = new Random(50);
 			String line = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 	        line += "<level width=\"480\" height=\"" + height + "\">\n";
 	        out.write(line.getBytes());
