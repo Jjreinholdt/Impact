@@ -12,8 +12,7 @@ import Game.impact.scene.MainMenuScene;
 import Game.impact.scene.SplashScene;
 
 /**
- * @author Mateusz Mysliwiec
- * @author www.matim-dev.com
+ * @author James Reinholdt
  * @version 1.0
  */
 public class SceneManager

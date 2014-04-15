@@ -20,6 +20,7 @@ import org.andengine.util.debug.Debug;
 import android.graphics.Color;
 
 import Game.impact.GameActivity;
+import Game.impact.levelGen.Generator;
 
 /**
  * @author James Reinholdt
@@ -40,6 +41,7 @@ public class ResourcesManager
 	
 	public Font font;
 	
+	public Generator levelGen = new Generator(); 
 	//---------------------------------------------
 	// TEXTURES & TEXTURE REGIONS
 	//---------------------------------------------
@@ -87,8 +89,8 @@ public class ResourcesManager
 	private void loadMenuGraphics()
 	{
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/menu/");
-        menuTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR);
-        menu_background_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "menu_background.png");
+        menuTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 2048, 2048, TextureOptions.BILINEAR);
+        menu_background_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "bkg.png");
         play_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "play.png");
         options_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "options.png");
        
@@ -162,7 +164,9 @@ public class ResourcesManager
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
         splashTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 1024, 500, TextureOptions.BILINEAR);
         splash_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashTextureAtlas, activity, "Impact.png", 0, 0);
-        splashTextureAtlas.load();	
+        splashTextureAtlas.load();
+        
+		levelGen.genlvl(activity, 1, 1024); //generates first level during splash
 	}
 	
 	public void unloadSplashScreen()

@@ -1,5 +1,6 @@
 package Game.impact.scene;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.andengine.engine.camera.hud.HUD;
@@ -55,7 +56,6 @@ import Game.impact.object.Player;
 public class GameScene extends BaseScene implements IOnSceneTouchListener, SensorEventListener
 {
 	private int score = 0;
-	
 	private HUD gameHUD;
 	private Text scoreText;
 	private PhysicsWorld physicsWorld;
@@ -255,8 +255,16 @@ public class GameScene extends BaseScene implements IOnSceneTouchListener, Senso
 				return levelObject;
 			}
 		});
-
-		levelLoader.loadLevelFromAsset(activity.getAssets(), "level/" + levelID + ".lvl");
+		try
+		{
+			FileInputStream in = activity.openFileInput("" + levelID + ".lvl"); //reads a file created by Generator
+			levelLoader.loadLevelFromStream(in);
+			in.close();
+		}catch(Exception e)
+		{
+			System.out.println("Failed to open file");
+		}
+		//levelLoader.loadLevelFromAsset(activity.getAssets(), "" + levelID + ".lvl");
 	}
 	
 	private void createGameOverText()
